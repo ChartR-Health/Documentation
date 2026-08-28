@@ -31,7 +31,33 @@
           "icon": "newspaper"
         }
       ]
-    }
+    },
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "index",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "Projects",
+        "pages": [
+          "projects/awesome",
+          "projects/chartr-gyms"
+        ]
+      },
+      {
+        "group": "Environments",
+        "icon": "hospital",
+        "pages": []
+      },
+      {
+        "group": "Releases",
+        "icon": "tag",
+        "pages": []
+      }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
