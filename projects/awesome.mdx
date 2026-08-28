@@ -1,0 +1,52 @@
+---
+title: "Awesome: the flagship EHR environment family"
+sidebarTitle: "Awesome"
+description: "A working EHR replica offered across four surfaces: a curated tool list, raw interoperability protocols, a research-system join, and pure computer use."
+icon: "hospital-user"
+---
+
+Awesome is our EHR replica: a working clinical store with real patients, real encounters, and the full lifecycle of notes, orders, and prescriptions.
+
+What makes it a family rather than a single environment is that the **same clinical store is offered across four different surfaces**. The medicine stays constant; how a model reaches it changes. That isolates a question most benchmarks conflate — whether a model knows what to do, versus whether it can actually do it against a real interface.
+
+## The four surfaces
+
+<Columns cols={2}>
+  <Card title="Awesome MCP" icon="wrench" href="/environments/awesome-mcp">
+    A curated set of 23 clinical tools, each documented. Measures clinical judgement with the integration work removed.
+  </Card>
+
+  <Card title="Awesome Interop" icon="network-wired" href="/environments/awesome-interop">
+    No tool list at all. A shell, a base URL, and a token, over FHIR REST, CDS Hooks, and HL7 v2.
+  </Card>
+
+  <Card title="Awesome + EDC" icon="flask" href="/environments/awesome-edc">
+    The EHR joined to a research database, for work that spans two systems at once.
+  </Card>
+
+  <Card title="Awesome CU" icon="computer-mouse" href="/environments/awesome-cu">
+    Screens only. Click, scroll, screenshot — no API, no text representation of the record.
+  </Card>
+</Columns>
+
+## Why the pairing matters
+
+Tasks in Awesome MCP and Awesome Interop are **twinned**: the same clinical work, with byte-identical grading material, enforced by a cross-environment equivalence test.
+
+When a model scores well on the curated surface and poorly on the raw one, that gap is informative and attributable. It is not a difference in task difficulty or in grading — it is the cost of removing the tool list.
+
+<Note>
+  This is the clearest measurement we offer of the difference between clinical reasoning and clinical execution.
+</Note>
+
+## Where to start
+
+<Columns cols={2}>
+  <Card title="Environment catalogue" icon="grid-2" href="/environments/overview">
+    All twelve environments, grouped by what they measure.
+  </Card>
+
+  <Card title="Release timeline" icon="clock-rotate-left" href="/releases/timeline">
+    Every release across the catalogue, filterable by environment.
+  </Card>
+</Columns>
