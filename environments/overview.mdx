@@ -1,0 +1,118 @@
+---
+title: "Environment catalogue"
+sidebarTitle: "Overview"
+description: "Every ChartR evaluation environment, what it measures, and how a model works inside it."
+icon: "grid-2"
+keywords:
+  - "healthcare AI evaluation"
+  - "agent environments"
+  - "clinical benchmarks"
+  - "EHR agents"
+---
+
+ChartR builds realistic healthcare environments and clinically meaningful tasks for evaluating models. Each environment is a working system — a real clinical record, a real payer integration, a real research database — not a transcript or a multiple-choice set. A model is measured on what it actually accomplishes inside that system.
+
+## How environments differ
+
+The useful distinction between our environments is not the specialty. It is **how a model reaches the system**, because that is what determines the capability under test.
+
+<Columns cols={3}>
+  <Card title="Tool surface" icon="wrench">
+    A curated set of tools, each with documentation. Measures clinical judgement with the integration work removed.
+  </Card>
+
+  <Card title="Raw protocol" icon="terminal">
+    A shell, a base URL, and a token. The model constructs its own calls. Measures whether it can drive a real interface.
+  </Card>
+
+  <Card title="Computer use" icon="computer-mouse">
+    Screenshots and clicks against a real interface. Measures whether it can operate software built for people.
+  </Card>
+</Columns>
+
+Several environments deliberately pair with each other so the same clinical work can be compared across surfaces.
+
+## Revenue cycle
+
+<Columns cols={2}>
+  <Card title="Revenue Cycle Management" icon="file-invoice-dollar" href="/environments/revenue-cycle-management">
+    Work a professional medical claim end to end — clinical record to payment, including denials.
+  </Card>
+
+  <Card title="Payer Portal" icon="building-columns" href="/environments/payer-portal">
+    The payer-side portal a biller works: eligibility, authorisation, claim entry, and the denial queue.
+  </Card>
+</Columns>
+
+## EHR and clinical workflow
+
+<Columns cols={2}>
+  <Card title="Awesome MCP" icon="notes-medical" href="/environments/awesome-mcp">
+    A functioning EHR replica worked through a curated clinical tool surface.
+  </Card>
+
+  <Card title="Awesome Interop" icon="network-wired" href="/environments/awesome-interop">
+    The same clinical store reached through raw interoperability protocols, with no tool list.
+  </Card>
+
+  <Card title="Awesome + EDC" icon="flask" href="/environments/awesome-edc">
+    Clinical research across two systems at once, joined by a clinical data pull integration.
+  </Card>
+
+  <Card title="Awesome CU" icon="computer-mouse" href="/environments/awesome-cu">
+    Chart review as pure computer use — click, scroll, screenshot, nothing else.
+  </Card>
+
+  <Card title="FHIR" icon="fire" href="/environments/fhir">
+    A clinical record with no interface at all. Just the standard, a shell, and an endpoint.
+  </Card>
+
+  <Card title="EHR Web" icon="browser" href="/environments/ehr-web">
+    A seeded EHR worked through its own web forms rather than an API.
+  </Card>
+</Columns>
+
+## Research and specialty
+
+<Columns cols={2}>
+  <Card title="EDC" icon="clipboard-list" href="/environments/edc">
+    Electronic data capture for clinical trials — dictionaries, longitudinal studies, audit log.
+  </Card>
+
+  <Card title="Front Desk" icon="phone" href="/environments/front-desk">
+    Answer a live call and do the clinical administrative work at the same time.
+  </Card>
+
+  <Card title="Radiology Imaging" icon="x-ray" href="/environments/radiology-imaging">
+    Read a chest film by driving a real imaging viewer inside a chart.
+  </Card>
+
+  <Card title="Diagnostic Interview" icon="comments" href="/environments/diagnostic-interview">
+    Conduct a diagnostic interview under a question budget and commit to an answer.
+  </Card>
+</Columns>
+
+## Status
+
+<Info>
+  **Live** environments are available to run today. **In development** environments are built and runnable internally, with the surface still moving.
+</Info>
+
+| Environment | Surface | Status | Current version |
+| --- | --- | --- | --- |
+| [Revenue Cycle Management](/environments/revenue-cycle-management) | Tool surface | Live | v2.2.0 |
+| [Payer Portal](/environments/payer-portal) | Tool surface and human UI | Live | v2.0.0 |
+| [Awesome MCP](/environments/awesome-mcp) | Tool surface | Live | v2.2.0 |
+| [Awesome Interop](/environments/awesome-interop) | Raw protocol | Live | v1.1.0 |
+| [Awesome \+ EDC](/environments/awesome-edc) | Tool surface, multi-system | Live | v1.2.0 |
+| [Front Desk](/environments/front-desk) | Tool surface and voice | Live | v1.0.0 |
+| [EDC](/environments/edc) | Tool surface | Live | v1.1.0 |
+| [FHIR](/environments/fhir) | Raw protocol | In development | v1.2.0 |
+| [EHR Web](/environments/ehr-web) | Application layer | In development | v1.0.0 |
+| [Awesome CU](/environments/awesome-cu) | Computer use | In development | v1.0.0 |
+| [Radiology Imaging](/environments/radiology-imaging) | Computer use | In development | v1.1.0 |
+| [Diagnostic Interview](/environments/diagnostic-interview) | Conversational | In development | v1.0.0 |
+
+## Release history
+
+Every environment carries a version and a dated release history. See the [release timeline](/releases/timeline) for the full record across all environments, or the [versioning policy](/releases/versioning) for what each level means.

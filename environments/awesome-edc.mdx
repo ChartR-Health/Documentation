@@ -1,0 +1,98 @@
+---
+title: "Awesome + EDC"
+description: "Clinical research across an EHR and an electronic data capture system at once, joined by a clinical data pull integration."
+icon: "flask"
+sidebarTitle: "Awesome + EDC"
+keywords:
+  - "clinical research"
+  - "EDC"
+  - "clinical data pull"
+  - "trial screening"
+  - "multi-system agent"
+---
+
+<Info>
+  **Status** Live · **Current version** v1.2.0 · **Surface** Tool surface, multi-system
+</Info>
+
+Clinical research does not happen in one system. A coordinator works between the chart and the study database all day, and most of the difficulty lives in the join — knowing which chart value belongs in which study field, when a pulled value needs a human decision, and what must never be written back.
+
+This environment puts both systems in front of a model at once, connected by a clinical data pull integration, and measures whether it can move data between them correctly.
+
+## What the model sees
+
+Three tool surfaces simultaneously:
+
+<Columns cols={3}>
+  <Card title="The EHR" icon="notes-medical">
+    Chart reads and search across the clinical store.
+  </Card>
+
+  <Card title="The study database" icon="clipboard-list">
+    Records, data dictionaries, arms and events, reports, and the audit log.
+  </Card>
+
+  <Card title="The integration" icon="arrows-left-right">
+    Field mapping, record linking, fetching pulled data, and adjudicating what came across.
+  </Card>
+</Columns>
+
+## Parallel work
+
+<Tip>
+  This is the only environment where a model may issue **up to five independent tool calls per turn**.
+</Tip>
+
+That matters because genuinely cross-system work is often parallel: read the chart and the study record together, then reconcile. Allowing batched calls makes the difference between a model that plans across systems and one that walks through them serially something the environment can actually observe.
+
+## Task families
+
+<AccordionGroup>
+  <Accordion title="Chart-to-study handoff" icon="right-left">
+    Move clinical data into the study record correctly, including field mapping decisions.
+  </Accordion>
+
+  <Accordion title="Enrolment and adjudication" icon="user-check">
+    Enrol participants through the integration and adjudicate values that arrived from the chart.
+  </Accordion>
+
+  <Accordion title="Longitudinal follow-up" icon="calendar-days">
+    Capture follow-up visits against the right event in a longitudinal schedule.
+  </Accordion>
+
+  <Accordion title="Adverse event capture" icon="triangle-exclamation">
+    Record adverse events with the documentation a trial requires.
+  </Accordion>
+
+  <Accordion title="Results back to the chart" icon="arrow-left">
+    Write a study-side result into the clinical record — and, importantly, without disturbing anything else.
+  </Accordion>
+
+  <Accordion title="Trial screening" icon="filter">
+    Screen a cohort against trial criteria, identifying who is eligible and documenting why the rest are not.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  Write-back restraint is graded. Some tasks fail if the model changes clinical data it was not asked to touch — a research system should not quietly rewrite the chart.
+</Note>
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v1.2.0** | 2026-08-22 | Minor | Parallel tool calls |
+| **v1.1.0** | 2026-08-21 | Minor | Watchable runs |
+| **v1.0.0** | 2026-08-13 | Major | Initial release |
+
+### v1.2.0 — Parallel tool calls
+
+Up to five independent calls per turn, enabling genuinely parallel cross-system work, alongside cohort screening over a larger population.
+
+### v1.1.0 — Watchable runs
+
+A dual-system run became observable live, so the sequence of cross-system decisions can be followed as it happens rather than reconstructed afterwards.
+
+### v1.0.0 — Initial release
+
+Two healthcare systems in one task, joined by a clinical data pull integration — the first environment where a model has to reason across an EHR and a research database together.

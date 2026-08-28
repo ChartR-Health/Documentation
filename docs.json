@@ -50,12 +50,29 @@
       {
         "group": "Environments",
         "icon": "hospital",
-        "pages": []
+        "pages": [
+          "environments/overview",
+          "environments/revenue-cycle-management",
+          "environments/payer-portal",
+          "environments/awesome-mcp",
+          "environments/awesome-interop",
+          "environments/awesome-edc",
+          "environments/awesome-cu",
+          "environments/fhir",
+          "environments/ehr-web",
+          "environments/edc",
+          "environments/front-desk",
+          "environments/radiology-imaging",
+          "environments/diagnostic-interview"
+        ]
       },
       {
         "group": "Releases",
         "icon": "tag",
-        "pages": []
+        "pages": [
+          "releases/versioning",
+          "releases/timeline"
+        ]
       }
     ]
   },

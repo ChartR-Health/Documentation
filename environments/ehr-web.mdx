@@ -1,0 +1,42 @@
+---
+title: "EHR Web"
+description: "A seeded EHR worked through its own web forms rather than an API, and where new capability is proven first."
+icon: "browser"
+sidebarTitle: "EHR Web"
+keywords:
+  - "EHR"
+  - "web forms"
+  - "application layer"
+  - "care plan"
+  - "clinical documentation"
+---
+
+<Info>
+  **Status** In development · **Current version** v1.0.0 · **Surface** Application layer
+</Info>
+
+A seeded EHR worked through the application itself — its own web forms, its own navigation, its own save semantics — rather than through a clean API. The counterpart to the [FHIR](/environments/fhir) environment: the same clinical work, reached one layer up.
+
+The difference matters more than it sounds. An API accepts a well-formed resource. An application has opinions about the order you do things in, what it will let you save, and where a field actually lives.
+
+## Where this environment fits
+
+<Note>
+  EHR Web is where we prove capability that the [Awesome](/environments/awesome-mcp) environments do not support yet. As Awesome gains a capability, the corresponding work moves there.
+</Note>
+
+That has already happened once. Imaging was delivered here first, in [Radiology Imaging](/environments/radiology-imaging), and reading films is now supported directly in Awesome MCP. Expect the same pattern for other capabilities: proven here, then absorbed.
+
+## Task families
+
+Care plan authoring from the chart — read the record, decide on a plan, and enter it through the EHR's own care plan form.
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v1.0.0** | 2026-07-31 | Major | Initial release |
+
+### v1.0.0 — Initial release
+
+Registered as the application-layer counterpart to the FHIR environment: the same clinical work, reached through the EHR's own web forms.

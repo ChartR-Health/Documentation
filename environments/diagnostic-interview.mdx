@@ -1,0 +1,65 @@
+---
+title: "Diagnostic Interview"
+description: "Conduct a diagnostic interview under a question budget and commit to an answer."
+icon: "comments"
+sidebarTitle: "Diagnostic Interview"
+keywords:
+  - "diagnostic interview"
+  - "history taking"
+  - "clinical reasoning"
+  - "question efficiency"
+---
+
+<Info>
+  **Status** In development, unreleased · **Current version** v1.0.0 · **Surface** Conversational
+</Info>
+
+Two models in conversation. One plays a patient grounded in a real admission. The other conducts a diagnostic interview under a **question budget** and has to commit to a diagnosis. A third model judges the result.
+
+What makes this different from a diagnostic question set is that the information is not given — it has to be elicited. A model that would reach the right answer with a complete history has to first work out which history to take.
+
+## The question budget
+
+The budget is the mechanism that makes this a test of clinical reasoning rather than of exhaustiveness. A model cannot ask everything. It has to decide what is worth asking, in what order, and when it has enough to commit.
+
+Efficiency is scored alongside accuracy, so arriving at the right diagnosis having burned the whole budget scores differently from arriving there in half of it.
+
+## What the patient will and will not say
+
+The patient model is grounded in a real admission and constrained to answer as a patient would. It does not volunteer laboratory values, diagnostic codes, or anything else a person would not know about their own chart.
+
+## Scoring
+
+Four dimensions, weighted:
+
+<Columns cols={2}>
+  <Card title="Diagnostic accuracy" icon="bullseye">
+    Did the model reach the right answer.
+  </Card>
+
+  <Card title="Interview completeness" icon="list-check">
+    Did it cover what a competent history should cover.
+  </Card>
+
+  <Card title="Communication" icon="comment">
+    Was the interaction appropriate for a patient.
+  </Card>
+
+  <Card title="Question efficiency" icon="gauge-high">
+    How much of the budget it needed.
+  </Card>
+</Columns>
+
+<Note>
+  This environment is in development and not currently released for external use.
+</Note>
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v1.0.0** | 2026-07-31 | Major | Initial release |
+
+### v1.0.0 — Initial release
+
+Patient, interviewer, and judge as a single environment, with a question budget and a committed diagnosis as the terminal act.
