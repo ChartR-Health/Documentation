@@ -1,0 +1,107 @@
+---
+title: "Revenue Cycle Management"
+description: "Work a professional medical claim end to end, from clinical record to payment, through three protocol verbs."
+icon: "file-invoice-dollar"
+sidebarTitle: "Revenue Cycle Management"
+keywords:
+  - "revenue cycle"
+  - "medical coding"
+  - "claims"
+  - "X12 837P"
+  - "denials"
+  - "prior authorization"
+---
+
+<Info>
+  **Status** Live · **Current version** v2.2.0 · **Surface** Tool surface
+</Info>
+
+A model works a single professional medical claim from the clinical record all the way to payment. It reads the chart, confirms coverage, codes the encounter, transmits the claim, and handles whatever comes back — acknowledgements, remittance, or a denial that has to be reworked.
+
+This is the environment where the gap between reading medicine and doing revenue cycle work shows up most clearly. Getting the diagnosis right is necessary and not sufficient; the claim also has to survive a payer.
+
+## What the model works with
+
+The action space is deliberately narrow. Rather than a catalogue of typed helpers, the model gets **three protocol verbs** — one for the clinical record, one for the payer API, one for EDI — and composes real requests itself.
+
+That design is the point. A wide tool surface measures whether a model can pick the right function from a list. A narrow protocol surface measures whether it can actually drive a payer integration.
+
+<AccordionGroup>
+  <Accordion title="Clinical record" icon="folder-open">
+    A FHIR R4 store covering the resources a biller needs: patient, encounter, coverage, condition, observation, clinical documents, and the claim lifecycle including claim response and explanation of benefit. Code lookup and validation operations are available.
+  </Accordion>
+
+  <Accordion title="Payer API" icon="building-columns">
+    A REST contract modelled on a production payer gateway:
+
+    - Eligibility and benefits (270/271)
+    - Prior authorisation (278)
+    - Claim status (276/277)
+    - Attachments, appeals, and remittance listing
+  </Accordion>
+
+  <Accordion title="EDI" icon="file-code">
+    Real X12. The model transmits an 837P and receives acknowledgements and remittance back through a mailbox — 999, 277CA, and 835.
+  </Accordion>
+</AccordionGroup>
+
+## Task families
+
+<Columns cols={2}>
+  <Card title="First-pass claims" icon="file-circle-plus">
+    Start from a clinical encounter and get the claim paid. Coding is scored against gold, and payment requires an exact match.
+  </Card>
+
+  <Card title="Denial rework" icon="file-circle-xmark">
+    Start from a claim that has already been denied. Diagnose the denial and choose a disposition: resubmit, appeal, or write off.
+  </Card>
+</Columns>
+
+The two families measure different things. First-pass work is about getting it right. Denial work is about reading a rejection correctly and knowing which of three very different responses is warranted — including recognising when a claim is not worth pursuing.
+
+## Interaction
+
+A multi-turn agentic loop with a step horizon, a stall cutoff for non-advancing turns, and a hard cap on claim transmissions. A model cannot brute-force its way to payment by resubmitting.
+
+Runs in three harnesses: an in-process loop, an MCP server, and a container harness.
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v2.2.0** | 2026-08-25 | Minor | Denials |
+| **v2.1.0** | 2026-08-24 | Minor | Population-first runs |
+| **v2.0.0** | 2026-08-14 | Major | The real integration surface |
+| **v1.1.0** | 2026-07-12 | Minor | Container-harness packaging |
+| **v1.0.1** | 2026-07-11 | Patch | Coding-reference coverage |
+| **v1.0.0** | 2026-07-02 | Major | Initial release |
+
+### v2.2.0 — Denials
+
+Cases can now start from an already-denied claim. The model gets the biller's working surface rather than the three protocol verbs, and disposition decisions — resubmit, appeal, write off — are scored on their own terms.
+
+### v2.1.0 — Population-first runs
+
+A run selects a cohort before it begins rather than pointing at a single case, which makes evaluation across a patient population repeatable.
+
+### v2.0.0 — The real integration surface
+
+<Warning>
+  Results from before this release are not comparable with results after it. Both what the model sees and how it acts changed.
+</Warning>
+
+The largest change in the environment's history, delivered across four days. The chart became FHIR R4 rather than prose. The payer became a REST API contract covering eligibility, prior authorisation, and claim status. Claims became real X12 837P with acknowledgements and remittance returning through a mailbox. Then the action space collapsed from roughly forty-five typed tools to the three protocol verbs the environment uses today.
+
+Before this release, a model was operating a simulation of billing. After it, a model is driving the same interfaces a billing team drives.
+
+### v1.1.0 — Container-harness packaging
+
+The environment became runnable outside our own stack.
+
+### v1.0.1 — Coding-reference coverage
+
+The environment could previously hand a model a code it was then unable to look up, which pushed models into reworking answers that were already correct. Every code the environment can emit now resolves.
+
+### v1.0.0 — Initial release
+
+The first ChartR environment. A claim worked end to end through a typed tool set, scored on exact coding match with an outcome, coding, and process blend.

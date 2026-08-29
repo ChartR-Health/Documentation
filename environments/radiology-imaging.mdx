@@ -1,0 +1,76 @@
+---
+title: "Radiology Imaging"
+description: "Read a chest film by driving a real imaging viewer inside a chart, then write findings and choose follow-up."
+icon: "x-ray"
+sidebarTitle: "Radiology Imaging"
+keywords:
+  - "radiology"
+  - "chest x-ray"
+  - "DICOM"
+  - "imaging viewer"
+  - "computer use"
+  - "anchoring bias"
+---
+
+<Info>
+  **Status** In development · **Current version** v1.1.0 · **Surface** Computer use
+</Info>
+
+Chest imaging read the way a radiologist reads it: a real imaging archive behind a diagnostic viewer, embedded in a chart. The model drives the viewer by screenshot and click, reads the study, writes findings and an impression, and selects appropriate follow-up.
+
+<Note>
+  This is where imaging capability was first delivered. Reading films is now also supported directly in [Awesome MCP](/environments/awesome-mcp) through a tool surface. The two measure different things and both remain available — see [how they differ](#how-this-differs-from-imaging-in-awesome-mcp).
+</Note>
+
+## What is being measured
+
+The task families here are built around known failure modes in image interpretation rather than around anatomy:
+
+<AccordionGroup>
+  <Accordion title="Anchoring resistance" icon="anchor">
+    The chart suggests a diagnosis. The film does not support it. Does the model follow the chart or the image?
+  </Accordion>
+
+  <Accordion title="Finding conflation" icon="layer-group">
+    Two findings that look similar and mean different things. Does the model distinguish them?
+  </Accordion>
+
+  <Accordion title="Under-escalation" icon="arrow-trend-down">
+    A finding that warrants urgency. Does the model treat it with the seriousness it deserves?
+  </Accordion>
+
+  <Accordion title="Follow-up selection" icon="arrow-right">
+    A finding that requires further imaging. Does the model order the right study?
+  </Accordion>
+</AccordionGroup>
+
+These are the errors that matter clinically, and they are not visible in a benchmark that asks a model to describe an image in isolation.
+
+## Scoring
+
+Two axes, combined. **Process** covers how the model worked the study — whether it actually looked before concluding. **Accuracy** covers what it found, matched against the reference read, with credit for correct findings and penalties for missed and invented ones.
+
+Inventing a finding is penalised more heavily than the credit given for a correct one.
+
+## How this differs from imaging in Awesome MCP
+
+|  | Radiology Imaging | [Awesome MCP](/environments/awesome-mcp) |
+| --- | --- | --- |
+| How the model works | Drives a diagnostic viewer by screenshot and click | Requests rendered frames through a tool |
+| Primary question | Can a model operate imaging software | Can a model read a film and act on it clinically |
+| Setting | A dedicated radiology read | Imaging as one part of a broader clinical workflow |
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v1.1.0** | 2026-08-13 | Minor | Viewer inside the chart |
+| **v1.0.0** | 2026-08-07 | Major | Initial release |
+
+### v1.1.0 — Viewer inside the chart
+
+The imaging viewer moved into the chart proper, so the model reaches the study the way a clinician does rather than through a separate application.
+
+### v1.0.0 — Initial release
+
+Computer-use radiology: a real imaging archive behind a diagnostic viewer in an EHR chart, driven by screenshot and click, with process and accuracy scored separately.

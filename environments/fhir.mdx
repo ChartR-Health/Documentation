@@ -1,0 +1,76 @@
+---
+title: "FHIR"
+description: "A clinical record with no interface at all. Just the standard, a shell, and an endpoint."
+icon: "fire"
+sidebarTitle: "FHIR"
+keywords:
+  - "FHIR R4"
+  - "care plan"
+  - "execution graded"
+  - "clinical standard"
+  - "shell agent"
+---
+
+<Info>
+  **Status** In development · **Current version** v1.2.0 · **Surface** Raw protocol
+</Info>
+
+The most stripped-down clinical environment we run. A seeded FHIR R4 server and nothing else — no user interface, no tool list, no database client. The model gets a shell and an HTTP endpoint.
+
+It is the cleanest available measurement of whether a model can work a clinical record through the standard alone, with nothing interpreting the data on its behalf.
+
+## Execution-graded care plans
+
+The most distinctive thing about this environment is what counts as finishing.
+
+A model asked to build a care plan cannot satisfy the task by writing one. It has to carry the plan into the chart — filing the plan, placing the orders, writing the prescriptions — and it is graded on the resources it actually created.
+
+<Warning>
+  An action that exists only as prose has not been taken. A model that describes starting a medication, without a corresponding order in the record, has not started it.
+</Warning>
+
+This closes the most common gap between a model that sounds competent and one that is. Recommending the right thing and doing the right thing are scored differently here, on purpose.
+
+## Task families
+
+<Columns cols={2}>
+  <Card title="Care plan authoring" icon="clipboard-check">
+    Build a clinically appropriate plan from the chart and file it as a real record.
+  </Card>
+
+  <Card title="Care plan execution" icon="list-check">
+    Carry the plan out as orders and prescriptions, graded on the resulting resources.
+  </Card>
+
+  <Card title="Deterministic clinical work" icon="square-check">
+    Tasks with a single correct end state, recomputed from the record rather than compared to a fixture.
+  </Card>
+
+  <Card title="Clinical reasoning slate" icon="brain">
+    A broad set of physician-style reasoning tasks across specialties.
+  </Card>
+</Columns>
+
+## Populations
+
+A run is an environment, a cohort, and a task set. Selecting a patient population before the run means the same task can be evaluated against different clinical populations, and tasks that do not apply to a given cohort are excluded rather than silently failing.
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v1.2.0** | 2026-08-03 | Minor | Execution-graded care plans |
+| **v1.1.0** | 2026-08-02 | Minor | Populations as a run input |
+| **v1.0.0** | 2026-07-31 | Major | Initial release |
+
+### v1.2.0 — Execution-graded care plans
+
+The model must carry a plan into the chart as real orders and prescriptions, and is graded on those resources rather than on the text of the plan.
+
+### v1.1.0 — Populations as a run input
+
+A run became a combination of environment, cohort, and task set, rather than a task pointed at whatever data happened to be loaded.
+
+### v1.0.0 — Initial release
+
+Registered as its own environment: a screenless FHIR R4 server reached by shell and HTTP, with no interface interpreting the record for the model.

@@ -1,0 +1,62 @@
+---
+title: "Front Desk"
+description: "Answer a live call and do the clinical administrative work at the same time, with conduct gates that override task completion."
+icon: "phone"
+sidebarTitle: "Front Desk"
+keywords:
+  - "voice agent"
+  - "medical receptionist"
+  - "patient calls"
+  - "identity verification"
+  - "front office"
+---
+
+<Info>
+  **Status** Live · **Current version** v1.0.0 · **Surface** Tool surface and voice
+</Info>
+
+A medical receptionist answers a call. Somebody needs a prescription resent to the right pharmacy, or their results, or a records copy, and the model has to hold the conversation and do the clinical administrative work at the same time.
+
+This is the only environment where a model is doing two things at once under real constraints: talking to a person who is waiting, and working a chart that has to end up correct.
+
+## What the model works with
+
+<Columns cols={2}>
+  <Card title="Phone control" icon="phone-volume">
+    Answer, speak, place on hold, resume, transfer, and end the call.
+  </Card>
+
+  <Card title="Full chart access" icon="folder-open">
+    The clinical record, for the work the call is actually about.
+  </Card>
+</Columns>
+
+## The caller is deterministic
+
+The person on the other end is not improvising. The same questions produce the same disclosed facts, every run.
+
+More importantly, **facts are released only when actually asked for**. A caller does not volunteer their date of birth because the model needs it; the model has to ask. That makes identity verification something the environment can measure directly, rather than something that happens to occur.
+
+## Conduct gates
+
+<Warning>
+  Several conduct failures zero the score outright, regardless of whether the task was completed.
+</Warning>
+
+A model that resends the prescription correctly but disclosed protected information before verifying who it was talking to has not done the job. Neither has one that acted on a caller's assertion without a corresponding signal in the chart, or modified something it had no business touching.
+
+This is deliberate and it is the most opinionated scoring in the catalogue. In a front-office setting, some failures are not partial credit — they are the whole outcome.
+
+## Task families
+
+Prescription routing, refills, and non-receipt · results release · records requests and copies · telehealth registration · imaging copies · specimen retest · insurance and coverage · referral follow-up · portal access · paediatric calls involving a guardian.
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v1.0.0** | 2026-08-04 | Major | Initial release |
+
+### v1.0.0 — Initial release
+
+Phone control and full chart access in a single episode, a deterministic caller who releases facts only when asked, and conduct gates that zero the score independently of task completion.

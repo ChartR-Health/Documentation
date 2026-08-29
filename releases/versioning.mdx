@@ -1,0 +1,70 @@
+---
+title: "Versioning policy"
+sidebarTitle: "Versioning"
+description: "What major, minor, and patch mean for a ChartR environment, and when results stop being comparable."
+icon: "code-branch"
+keywords:
+  - "versioning"
+  - "semantic versioning"
+  - "comparability"
+  - "evaluation"
+  - "release policy"
+---
+
+Every ChartR environment carries its own version. Versions are per environment, not per platform — [Awesome MCP](/environments/awesome-mcp) v2.0.0 and [Awesome Interop](/environments/awesome-interop) v1.0.0 have no relationship to each other beyond a shared release date.
+
+## What the levels mean
+
+The question a version answers is not "how much changed" but **"can I still compare my results"**.
+
+<AccordionGroup>
+  <Accordion title="Major — results are not comparable" icon="triangle-exclamation">
+    Something changed about the evaluation itself: what the model can observe, what actions it can take, the protocol it works through, or the interaction loop.
+
+    A score from before a major release cannot be meaningfully compared with one from after it. The environment is asking a different question.
+
+    **Example:** [Revenue Cycle Management](/environments/revenue-cycle-management) v2.0.0, when the action space collapsed from roughly forty-five typed tools to three protocol verbs.
+  </Accordion>
+
+  <Accordion title="Minor — new capability, results still comparable" icon="plus">
+    A new capability, workflow, or supported task category was added without disturbing the existing surface. Work that ran before the release runs the same way after it.
+
+    **Example:** [Awesome MCP](/environments/awesome-mcp) v2.1.0, which added bulk export without changing any existing tool.
+  </Accordion>
+
+  <Accordion title="Patch — a correction" icon="wrench">
+    A fix that brings the environment closer to its intended behaviour. Intended semantics do not change.
+
+    **Example:** [Revenue Cycle Management](/environments/revenue-cycle-management) v1.0.1, which ensured every code the environment can emit is actually resolvable.
+  </Accordion>
+</AccordionGroup>
+
+## Comparability
+
+<Warning>
+  A major version bump is a warning that your baselines are stale. If you are tracking a model against an environment over time, re-baseline after every major release.
+</Warning>
+
+Where a release breaks comparability, the environment page and the [release timeline](/releases/timeline) say so explicitly. We would rather tell you a number is no longer meaningful than let you draw a conclusion from it.
+
+## A note on patch releases
+
+A patch that corrects an environment defect can still move measured scores — sometimes substantially. Revenue Cycle Management v1.0.1 is the clearest case: the environment had been handing models codes they could not look up, which pushed them into reworking answers that were already correct. Fixing that raised scores without any model getting better.
+
+We classify by intent, not by score movement. A change is a patch when the environment was not behaving as designed and now does.
+
+## Status labels
+
+<Columns cols={2}>
+  <Card title="Live" icon="circle-check">
+    Available to run today.
+  </Card>
+
+  <Card title="In development" icon="circle-half-stroke">
+    Built and runnable internally, with the surface still moving. Expect major releases.
+  </Card>
+</Columns>
+
+<Note>
+  Status is not a difficulty claim. An in-development environment is not easier or harder than a live one — it is less settled.
+</Note>

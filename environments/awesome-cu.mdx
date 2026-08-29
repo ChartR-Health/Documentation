@@ -1,0 +1,60 @@
+---
+title: "Awesome CU"
+description: "Chart review as pure computer use. Nine screens, three primitives, deterministic scoring."
+icon: "computer-mouse"
+sidebarTitle: "Awesome CU"
+keywords:
+  - "computer use"
+  - "chart review"
+  - "GUI agent"
+  - "screenshot"
+  - "clinical navigation"
+---
+
+<Info>
+  **Status** In development · **Current version** v1.0.0 · **Surface** Computer use
+</Info>
+
+Chart review with every affordance removed. No tools, no API, no text representation of the record — just an EHR interface and a model that has to find things in it.
+
+The action space is exactly three primitives:
+
+<Columns cols={3}>
+  <Card title="click" icon="arrow-pointer">
+    Click at a coordinate.
+  </Card>
+
+  <Card title="wheel" icon="arrows-up-down">
+    Scroll at a coordinate.
+  </Card>
+
+  <Card title="screenshot" icon="camera">
+    Look at the current screen.
+  </Card>
+</Columns>
+
+Nine clickable screens. Everything a model learns about the patient, it learns by navigating.
+
+## Why this environment exists
+
+Most clinical software was built for people, and a great deal of clinical information is only reachable by knowing where to look. A model that can answer questions from a well-formed FHIR bundle has not demonstrated it can work a chart the way a clinician does — finding the relevant tab, noticing the value that is off-screen, recognising that the answer lives somewhere it has not looked yet.
+
+This environment isolates that skill and nothing else.
+
+## Scoring
+
+Deterministic gates, with no model judging the result. A response is checked against declared fields, required wordings, forbidden wordings, and mutually exclusive alternatives.
+
+<Note>
+  Because scoring is deterministic and the interface is fixed, this environment has a clean floor: a model that cannot navigate scores zero, and there is no partial credit for a plausible-sounding answer that was never actually found on screen.
+</Note>
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v1.0.0** | 2026-08-01 | Major | Initial release |
+
+### v1.0.0 — Initial release
+
+Nine navigable screens, a three-primitive action space, and deterministic gate-based scoring.

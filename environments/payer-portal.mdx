@@ -1,0 +1,68 @@
+---
+title: "Payer Portal"
+description: "The payer-side portal a biller works: eligibility, prior authorisation, claim entry, remittance, and the denial queue."
+icon: "building-columns"
+sidebarTitle: "Payer Portal"
+keywords:
+  - "payer portal"
+  - "eligibility"
+  - "prior authorization"
+  - "CMS-1500"
+  - "remittance"
+  - "denials"
+---
+
+<Info>
+  **Status** Live · **Current version** v2.0.0 · **Surface** Tool surface and human UI
+</Info>
+
+The other side of the revenue cycle. Where [Revenue Cycle Management](/environments/revenue-cycle-management) measures whether a model can drive a payer integration programmatically, this environment is the portal a biller actually sits in front of — the web application where coverage gets checked, authorisations get requested, claims get keyed, and denials get worked.
+
+It is both a human interface and an agent environment. The same workflow can be measured either way, which makes it a direct comparison between how a person does the work and how a model does it.
+
+## What the portal covers
+
+<Columns cols={2}>
+  <Card title="Eligibility and benefits" icon="id-card">
+    Verify coverage before service and read back what the plan actually pays for.
+  </Card>
+
+  <Card title="Prior authorisation" icon="stamp">
+    Request authorisation and track the determination.
+  </Card>
+
+  <Card title="Claim entry" icon="file-pen">
+    A blank professional claim form, scrubbed and submitted.
+  </Card>
+
+  <Card title="Remittance and denials" icon="inbox">
+    Retrieve remittance advice, read claim activity, and work the denial queue.
+  </Card>
+</Columns>
+
+## Two surfaces, on purpose
+
+A model working a denied claim here gets the biller's tool surface — the typed claim-entry and portal tools a person would use — rather than the three protocol verbs used for first-pass claims in Revenue Cycle Management.
+
+<Note>
+  The two environments share an engine and differ in what they expose. That is deliberate: it separates "can a model drive the integration" from "can a model work the queue."
+</Note>
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v2.0.0** | 2026-08-25 | Major | Became an agent environment |
+| **v1.0.0** | 2026-08-19 | Major | Extracted as its own environment |
+
+### v2.0.0 — Became an agent environment
+
+<Warning>
+  This release changed what the environment is. Before it, the portal was a human interface only.
+</Warning>
+
+The portal gained three harnesses and a denial task set, exposing the biller's working surface to a model. Work that could previously only be measured by watching a person can now be measured by running a model against it.
+
+### v1.0.0 — Extracted as its own environment
+
+The portal had been a page inside Revenue Cycle Management. This release made it an environment in its own right, with eligibility, prior authorisation, claim entry, remittance, and the denial queue as a coherent working surface, and a caseload that loads when the portal opens.

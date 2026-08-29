@@ -1,0 +1,83 @@
+---
+title: "EDC"
+description: "Electronic data capture for clinical trials: dictionaries, longitudinal studies, and a full audit log."
+icon: "clipboard-list"
+sidebarTitle: "EDC"
+keywords:
+  - "electronic data capture"
+  - "clinical trials"
+  - "study coordinator"
+  - "data dictionary"
+  - "longitudinal"
+---
+
+<Info>
+  **Status** Live · **Current version** v1.1.0 · **Surface** Tool surface
+</Info>
+
+An electronic data capture system as an environment in its own right — the software clinical trials actually run on. A model works it the way a study coordinator does: building and amending data dictionaries, entering and correcting records, capturing longitudinal follow-up against the right event, and leaving a clean audit trail.
+
+The environment is a faithful emulator of a widely used research platform's API, built so the workflow can be evaluated without depending on the platform itself.
+
+## What the model works with
+
+A **19-tool** API surface covering the operations a coordinator relies on:
+
+<AccordionGroup>
+  <Accordion title="Records" icon="table-list">
+    Export, import, and delete records, and generate the next record identifier in a study's sequence.
+  </Accordion>
+
+  <Accordion title="Study structure" icon="sitemap">
+    Read and amend the data dictionary, list instruments, read arms and events, and read the instrument-event mapping for longitudinal designs.
+  </Accordion>
+
+  <Accordion title="Study administration" icon="gear">
+    Create a study from scratch, read project information, and list users and data access groups.
+  </Accordion>
+
+  <Accordion title="Audit and reporting" icon="file-lines">
+    Read the full logging history and run defined reports.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  During a graded run the model works entirely through the API. A separate web interface exists for people, but it is not exposed to the model — so a task cannot be solved by reading a rendered page.
+</Note>
+
+## Conformance
+
+The API surface is verified against an **unmodified third-party community client** written for the real platform. If a generic client built by someone else can drive our emulator without changes, the contract is right.
+
+That is a stronger guarantee than an internal test suite, because it is not written against our own assumptions.
+
+## Task families
+
+<Columns cols={3}>
+  <Card title="Enrolment backlog" icon="user-plus">
+    Work through a backlog of consent and enrolment records.
+  </Card>
+
+  <Card title="Dictionary amendment" icon="pen-ruler">
+    Change a study's data dictionary and backfill existing records against it.
+  </Card>
+
+  <Card title="Longitudinal capture" icon="calendar-days">
+    Record follow-up responses against the correct event in a schedule.
+  </Card>
+</Columns>
+
+## Release history
+
+| Version | Date | Level | Summary |
+| --- | --- | --- | --- |
+| **v1.1.0** | 2026-08-21 | Minor | Study creation |
+| **v1.0.0** | 2026-08-11 | Major | Initial release |
+
+### v1.1.0 — Study creation
+
+A model can now create a study from scratch rather than only working inside one that already exists, which makes study design itself measurable.
+
+### v1.0.0 — Initial release
+
+An electronic data capture platform as a standalone environment — dictionaries, longitudinal studies, and the audit log, worked entirely through an API surface and verified against a third-party client.
