@@ -1,0 +1,70 @@
+---
+title: "Awesome Interop"
+sidebarTitle: "Awesome Interop"
+description: "The same clinical store reached through raw interoperability protocols, with no tool list and deny-by-default scopes."
+icon: "network-wired"
+keywords:
+  - "interoperability"
+  - "FHIR REST"
+  - "CDS Hooks"
+  - "HL7 v2"
+  - "MLLP"
+  - "integration engineer"
+---
+
+<Info>
+  **Status** Live · **Version** v1.1 · **Surface** Raw protocol
+</Info>
+
+The same clinical store as [Awesome MCP](/environments/awesome-mcp), reached the way an integration engineer would reach it. There is no tool list. The model gets a shell, a base URL, and a bearer token, and has to construct every call itself.
+
+This environment answers a different question from its twin. Awesome MCP asks whether a model knows what to do clinically. Awesome Interop asks whether it can actually do it against a real interface — finding the right resource, shaping the request, handling the error vocabulary, and working within the access it was granted.
+
+## Protocols
+
+<Columns cols={3}>
+  <Card title="FHIR R4 REST" icon="fire">
+    The full clinical store over REST, at a production EHR's path shape.
+  </Card>
+
+  <Card title="CDS Hooks" icon="bolt">
+    Clinical decision support fired at the point of care.
+  </Card>
+
+  <Card title="HL7 v2 over MLLP" icon="tower-broadcast">
+    Message transmission over a real wire protocol.
+  </Card>
+</Columns>
+
+## How the model acts
+
+Shell commands. The environment injects the base URL, a bearer token, the decision-support context, and the message endpoints; everything else is up to the model.
+
+<Note>
+  **Scopes are deny-by-default.** A model has to work within the access it was actually granted, which makes authorisation failure a realistic and measurable outcome rather than an edge case.
+</Note>
+
+### Clinical decision support
+
+CDS Hooks here is not a passive notification. The model **authors the card response itself** and posts it back; valid suggestions are then accepted and signed by the simulated clinician. A model is being measured on whether it can produce a well-formed, clinically appropriate decision-support response, not on whether it can read one.
+
+## Twinned with Awesome MCP
+
+Every task in this environment has a twin in [Awesome MCP](/environments/awesome-mcp) with **byte-identical grading material**, enforced by a cross-environment equivalence test.
+
+That pairing is the most useful thing about this environment. The same clinical work, graded the same way, across a curated tool surface and a raw protocol surface — so the difference in a model's score is attributable to the surface rather than to the task.
+
+## Release history
+
+| Version | Date | Summary |
+| --- | --- | --- |
+| **v1.1** | 2026-08-27 | Independent environment |
+| **v1.0** | 2026-08-18 | Initial release |
+
+### v1.1 — Independent environment
+
+Previously shared a directory and clinical store with Awesome MCP. Now an independent environment with its own task tree and harness.
+
+### v1.0 — Initial release
+
+The raw integration surface: FHIR R4 REST, CDS Hooks, and HL7 v2 over MLLP, driven from a shell with no tool list and deny-by-default scopes.

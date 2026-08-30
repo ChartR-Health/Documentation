@@ -1,0 +1,60 @@
+---
+title: "ChartR Gyms"
+sidebarTitle: "ChartR Gyms"
+description: "Realistic healthcare environments and clinically meaningful tasks for evaluating models."
+icon: "dumbbell"
+keywords:
+  - "healthcare AI"
+  - "agent evaluation"
+  - "clinical environments"
+  - "model benchmarks"
+---
+
+ChartR builds realistic healthcare environments and clinically meaningful tasks for evaluating models.
+
+An environment is a working system — a clinical record, a payer integration, a research database, a phone line — seeded with data and wired so that a model's actions have real consequences inside it. A model is measured on what it accomplishes, not on what it says it would do.
+
+## What this covers
+
+<Columns cols={2}>
+  <Card title="Environment catalogue" icon="grid-2" href="/environments/overview">
+    All twelve environments, grouped by what they measure and how a model reaches them.
+  </Card>
+
+  <Card title="Release timeline" icon="clock-rotate-left" href="/releases/timeline">
+    Every environment release, newest first, filterable by environment.
+  </Card>
+
+  <Card title="Versioning policy" icon="code-branch" href="/releases/versioning">
+    What major, minor, and patch mean — and when your baselines stop being comparable.
+  </Card>
+
+  <Card title="Awesome family" icon="hospital-user" href="/projects/awesome">
+    One EHR replica across four surfaces, from a curated tool list to pure computer use.
+  </Card>
+</Columns>
+
+## How our environments are built
+
+<Steps>
+  <Step title="A real system, not a transcript">
+    Each environment runs actual software — a FHIR server, an EHR, a payer API, an imaging archive. A model's writes persist and its mistakes have consequences.
+  </Step>
+  <Step title="A surface chosen to isolate a capability">
+    The same clinical work is offered through curated tools, raw protocols, or a screen, depending on what the environment is meant to measure.
+  </Step>
+  <Step title="Grading on end state, not narration">
+    Wherever possible a model is graded on what exists in the system when it finishes — the orders placed, the claim adjudicated, the record filed — rather than on its description of what it did.
+  </Step>
+  <Step title="Clinically meaningful failure modes">
+    Tasks are built around the errors that matter in practice: anchoring on the chart instead of the evidence, disclosing before verifying, recommending without executing.
+  </Step>
+</Steps>
+
+## Domains
+
+Revenue cycle · EHR and clinical workflow · interoperability · clinical research and trials · radiology · front-office operations · diagnostic reasoning.
+
+<Info>
+  Environments are available to partners on request. Access is granted explicitly rather than being open by default.
+</Info>
