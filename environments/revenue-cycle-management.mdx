@@ -1,8 +1,8 @@
 ---
 title: "Revenue Cycle Management"
+sidebarTitle: "Revenue Cycle Management"
 description: "Work a professional medical claim end to end, from clinical record to payment, through three protocol verbs."
 icon: "file-invoice-dollar"
-sidebarTitle: "Revenue Cycle Management"
 keywords:
   - "revenue cycle"
   - "medical coding"
@@ -13,7 +13,7 @@ keywords:
 ---
 
 <Info>
-  **Status** Live · **Current version** v2.2.0 · **Surface** Tool surface
+  **Status** Live · **Version** v2.2 · **Surface** Tool surface
 </Info>
 
 A model works a single professional medical claim from the clinical record all the way to payment. It reads the chart, confirms coverage, codes the encounter, transmits the claim, and handles whatever comes back — acknowledgements, remittance, or a denial that has to be reworked.
@@ -67,24 +67,23 @@ Runs in three harnesses: an in-process loop, an MCP server, and a container harn
 
 ## Release history
 
-| Version | Date | Level | Summary |
-| --- | --- | --- | --- |
-| **v2.2.0** | 2026-08-25 | Minor | Denials |
-| **v2.1.0** | 2026-08-24 | Minor | Population-first runs |
-| **v2.0.0** | 2026-08-14 | Major | The real integration surface |
-| **v1.1.0** | 2026-07-12 | Minor | Container-harness packaging |
-| **v1.0.1** | 2026-07-11 | Patch | Coding-reference coverage |
-| **v1.0.0** | 2026-07-02 | Major | Initial release |
+| Version | Date | Summary |
+| --- | --- | --- |
+| **v2.2** | 2026-08-25 | Denials |
+| **v2.1** | 2026-08-24 | Population-first runs |
+| **v2.0** | 2026-08-14 | The real integration surface |
+| **v1.1** | 2026-07-12 | Container-harness packaging |
+| **v1.0** | 2026-07-02 | Initial release |
 
-### v2.2.0 — Denials
+### v2.2 — Denials
 
 Cases can now start from an already-denied claim. The model gets the biller's working surface rather than the three protocol verbs, and disposition decisions — resubmit, appeal, write off — are scored on their own terms.
 
-### v2.1.0 — Population-first runs
+### v2.1 — Population-first runs
 
 A run selects a cohort before it begins rather than pointing at a single case, which makes evaluation across a patient population repeatable.
 
-### v2.0.0 — The real integration surface
+### v2.0 — The real integration surface
 
 <Warning>
   Results from before this release are not comparable with results after it. Both what the model sees and how it acts changed.
@@ -94,14 +93,10 @@ The largest change in the environment's history, delivered across four days. The
 
 Before this release, a model was operating a simulation of billing. After it, a model is driving the same interfaces a billing team drives.
 
-### v1.1.0 — Container-harness packaging
+### v1.1 — Container-harness packaging
 
 The environment became runnable outside our own stack.
 
-### v1.0.1 — Coding-reference coverage
-
-The environment could previously hand a model a code it was then unable to look up, which pushed models into reworking answers that were already correct. Every code the environment can emit now resolves.
-
-### v1.0.0 — Initial release
+### v1.0 — Initial release
 
 The first ChartR environment. A claim worked end to end through a typed tool set, scored on exact coding match with an outcome, coding, and process blend.

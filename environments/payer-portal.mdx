@@ -1,8 +1,8 @@
 ---
 title: "Payer Portal"
+sidebarTitle: "Payer Portal"
 description: "The payer-side portal a biller works: eligibility, prior authorisation, claim entry, remittance, and the denial queue."
 icon: "building-columns"
-sidebarTitle: "Payer Portal"
 keywords:
   - "payer portal"
   - "eligibility"
@@ -13,7 +13,7 @@ keywords:
 ---
 
 <Info>
-  **Status** Live · **Current version** v2.0.0 · **Surface** Tool surface and human UI
+  **Status** Live · **Version** v2.0 · **Surface** Tool surface and human UI
 </Info>
 
 The other side of the revenue cycle. Where [Revenue Cycle Management](/environments/revenue-cycle-management) measures whether a model can drive a payer integration programmatically, this environment is the portal a biller actually sits in front of — the web application where coverage gets checked, authorisations get requested, claims get keyed, and denials get worked.
@@ -50,12 +50,12 @@ A model working a denied claim here gets the biller's tool surface — the typed
 
 ## Release history
 
-| Version | Date | Level | Summary |
-| --- | --- | --- | --- |
-| **v2.0.0** | 2026-08-25 | Major | Became an agent environment |
-| **v1.0.0** | 2026-08-19 | Major | Extracted as its own environment |
+| Version | Date | Summary |
+| --- | --- | --- |
+| **v2.0** | 2026-08-25 | Became an agent environment |
+| **v1.0** | 2026-08-19 | Extracted as its own environment |
 
-### v2.0.0 — Became an agent environment
+### v2.0 — Became an agent environment
 
 <Warning>
   This release changed what the environment is. Before it, the portal was a human interface only.
@@ -63,6 +63,6 @@ A model working a denied claim here gets the biller's tool surface — the typed
 
 The portal gained three harnesses and a denial task set, exposing the biller's working surface to a model. Work that could previously only be measured by watching a person can now be measured by running a model against it.
 
-### v1.0.0 — Extracted as its own environment
+### v1.0 — Extracted as its own environment
 
 The portal had been a page inside Revenue Cycle Management. This release made it an environment in its own right, with eligibility, prior authorisation, claim entry, remittance, and the denial queue as a coherent working surface, and a caseload that loads when the portal opens.

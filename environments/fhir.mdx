@@ -1,8 +1,8 @@
 ---
 title: "FHIR"
+sidebarTitle: "FHIR"
 description: "A clinical record with no interface at all. Just the standard, a shell, and an endpoint."
 icon: "fire"
-sidebarTitle: "FHIR"
 keywords:
   - "FHIR R4"
   - "care plan"
@@ -12,7 +12,7 @@ keywords:
 ---
 
 <Info>
-  **Status** In development · **Current version** v1.2.0 · **Surface** Raw protocol
+  **Status** In development · **Version** v1.2 · **Surface** Raw protocol
 </Info>
 
 The most stripped-down clinical environment we run. A seeded FHIR R4 server and nothing else — no user interface, no tool list, no database client. The model gets a shell and an HTTP endpoint.
@@ -57,20 +57,20 @@ A run is an environment, a cohort, and a task set. Selecting a patient populatio
 
 ## Release history
 
-| Version | Date | Level | Summary |
-| --- | --- | --- | --- |
-| **v1.2.0** | 2026-08-03 | Minor | Execution-graded care plans |
-| **v1.1.0** | 2026-08-02 | Minor | Populations as a run input |
-| **v1.0.0** | 2026-07-31 | Major | Initial release |
+| Version | Date | Summary |
+| --- | --- | --- |
+| **v1.2** | 2026-08-03 | Execution-graded care plans |
+| **v1.1** | 2026-08-02 | Populations as a run input |
+| **v1.0** | 2026-07-31 | Initial release |
 
-### v1.2.0 — Execution-graded care plans
+### v1.2 — Execution-graded care plans
 
 The model must carry a plan into the chart as real orders and prescriptions, and is graded on those resources rather than on the text of the plan.
 
-### v1.1.0 — Populations as a run input
+### v1.1 — Populations as a run input
 
 A run became a combination of environment, cohort, and task set, rather than a task pointed at whatever data happened to be loaded.
 
-### v1.0.0 — Initial release
+### v1.0 — Initial release
 
 Registered as its own environment: a screenless FHIR R4 server reached by shell and HTTP, with no interface interpreting the record for the model.

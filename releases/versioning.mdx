@@ -11,57 +11,68 @@ keywords:
   - "release policy"
 ---
 
-Every ChartR environment carries its own version. Versions are per environment, not per platform — [Awesome MCP](/environments/awesome-mcp) v2.0.0 and [Awesome Interop](/environments/awesome-interop) v1.0.0 have no relationship to each other beyond a shared release date.
+Every ChartR environment carries its own version in the form `vMAJOR.MINOR`.
 
-## What the levels mean
+Versions are per environment, not per platform. [Awesome MCP](/environments/awesome-mcp) v2.2 and [Awesome Interop](/environments/awesome-interop) v1.1 have no relationship to each other beyond a shared clinical store.
+
+## What the two numbers mean
 
 The question a version answers is not "how much changed" but **"can I still compare my results"**.
 
-<AccordionGroup>
-  <Accordion title="Major — results are not comparable" icon="triangle-exclamation">
-    Something changed about the evaluation itself: what the model can observe, what actions it can take, the protocol it works through, or the interaction loop.
+<Columns cols={2}>
+  <Card title="MAJOR" icon="arrows-rotate" horizontal>
+    The evaluation itself changed. Re-baseline.
+  </Card>
 
-    A score from before a major release cannot be meaningfully compared with one from after it. The environment is asking a different question.
+  <Card title="MINOR" icon="plus" horizontal>
+    New capability. Existing work is unaffected.
+  </Card>
+</Columns>
 
-    **Example:** [Revenue Cycle Management](/environments/revenue-cycle-management) v2.0.0, when the action space collapsed from roughly forty-five typed tools to three protocol verbs.
-  </Accordion>
+### A major bump means re-baseline
 
-  <Accordion title="Minor — new capability, results still comparable" icon="plus">
-    A new capability, workflow, or supported task category was added without disturbing the existing surface. Work that ran before the release runs the same way after it.
+Something changed about what the model can observe, the actions available to it, the protocol it works through, or the interaction loop.
 
-    **Example:** [Awesome MCP](/environments/awesome-mcp) v2.1.0, which added bulk export without changing any existing tool.
-  </Accordion>
-
-  <Accordion title="Patch — a correction" icon="wrench">
-    A fix that brings the environment closer to its intended behaviour. Intended semantics do not change.
-
-    **Example:** [Revenue Cycle Management](/environments/revenue-cycle-management) v1.0.1, which ensured every code the environment can emit is actually resolvable.
-  </Accordion>
-</AccordionGroup>
-
-## Comparability
+A score from before a major release cannot be meaningfully compared with one from after it. The environment is asking a different question.
 
 <Warning>
-  A major version bump is a warning that your baselines are stale. If you are tracking a model against an environment over time, re-baseline after every major release.
+  If you are tracking a model against an environment over time, a major bump is a signal that your baselines are stale. Re-run them.
 </Warning>
 
-Where a release breaks comparability, the environment page and the [release timeline](/releases/timeline) say so explicitly. We would rather tell you a number is no longer meaningful than let you draw a conclusion from it.
+The clearest example is [Revenue Cycle Management](/environments/revenue-cycle-management) v2.0, where the action space collapsed from roughly forty-five typed tools to three protocol verbs. A model's score on v1.1 tells you nothing useful about its score on v2.0.
 
-## A note on patch releases
+There have been **three** major bumps beyond an environment's first release. You can see them marked on the [release timeline](/releases/timeline).
 
-A patch that corrects an environment defect can still move measured scores — sometimes substantially. Revenue Cycle Management v1.0.1 is the clearest case: the environment had been handing models codes they could not look up, which pushed them into reworking answers that were already correct. Fixing that raised scores without any model getting better.
+### A minor bump is additive
 
-We classify by intent, not by score movement. A change is a patch when the environment was not behaving as designed and now does.
+A new capability, workflow, or supported task category, added without disturbing the existing surface. Work that ran before the release runs the same way after it.
+
+[Awesome MCP](/environments/awesome-mcp) v2.1 added bulk export without changing any existing tool. If you were running chart-level tasks before it, your results still stand.
+
+## What is not in the timeline
+
+The [release timeline](/releases/timeline) records changes to what an environment _is_. It deliberately excludes routine work that does not change the evaluation:
+
+- Bug fixes and reliability corrections
+- Dependency and infrastructure changes
+- Internal refactors
+- Content and data corrections that do not alter intended semantics
+
+<Note>
+  These ship continuously and do not receive a version entry. An environment at v1.2 today and v1.2 last week is the same evaluation, but it is not necessarily the same code.
+</Note>
+
+A correction can still move measured scores — fixing a defect that was penalising models will raise them without any model getting better. Where a fix is large enough to affect comparability, it is treated as a major bump rather than being folded in quietly.
 
 ## Status labels
 
 <Columns cols={2}>
-  <Card title="Live" icon="circle-check">
+  <Card title="Live" icon="circle-check" horizontal>
     Available to run today.
   </Card>
 
-  <Card title="In development" icon="circle-half-stroke">
-    Built and runnable internally, with the surface still moving. Expect major releases.
+  <Card title="In development" icon="circle-half-stroke" horizontal>
+    Built and runnable internally, surface still moving. Expect major bumps.
   </Card>
 </Columns>
 

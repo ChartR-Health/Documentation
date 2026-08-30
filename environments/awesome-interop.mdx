@@ -1,8 +1,8 @@
 ---
 title: "Awesome Interop"
+sidebarTitle: "Awesome Interop"
 description: "The same clinical store reached through raw interoperability protocols, with no tool list and deny-by-default scopes."
 icon: "network-wired"
-sidebarTitle: "Awesome Interop"
 keywords:
   - "interoperability"
   - "FHIR REST"
@@ -13,7 +13,7 @@ keywords:
 ---
 
 <Info>
-  **Status** Live · **Current version** v1.1.0 · **Surface** Raw protocol
+  **Status** Live · **Version** v1.1 · **Surface** Raw protocol
 </Info>
 
 The same clinical store as [Awesome MCP](/environments/awesome-mcp), reached the way an integration engineer would reach it. There is no tool list. The model gets a shell, a base URL, and a bearer token, and has to construct every call itself.
@@ -56,15 +56,15 @@ That pairing is the most useful thing about this environment. The same clinical 
 
 ## Release history
 
-| Version | Date | Level | Summary |
-| --- | --- | --- | --- |
-| **v1.1.0** | 2026-08-27 | Minor | Independent environment |
-| **v1.0.0** | 2026-08-18 | Major | Initial release |
+| Version | Date | Summary |
+| --- | --- | --- |
+| **v1.1** | 2026-08-27 | Independent environment |
+| **v1.0** | 2026-08-18 | Initial release |
 
-### v1.1.0 — Independent environment
+### v1.1 — Independent environment
 
 Previously shared a directory and clinical store with Awesome MCP. Now an independent environment with its own task tree and harness.
 
-### v1.0.0 — Initial release
+### v1.0 — Initial release
 
 The raw integration surface: FHIR R4 REST, CDS Hooks, and HL7 v2 over MLLP, driven from a shell with no tool list and deny-by-default scopes.
