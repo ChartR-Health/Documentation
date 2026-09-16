@@ -14,4 +14,9 @@ The following requirements must be met for a task to be shippable in its current
         - If there are multiple accepted ways to complete the task, rubric should focus on verifying that the final action is completed correctly, rather than the intermediate steps. 
         - However, clinicians should leave comments outlining unsafe and potentially harmful actions that the model may take en route to completing the task. Our engineers will then encode these into the rubric, lowering model score and/or failing the model for taking such actions.
     - Clinicians are allowed to edit the task prompt and rubric items as they see fit to match the criteria outlined above.
-    - Clinicians are also instructed to label rubric items on 2 different 1-5 scales, representing clinical correctness and potential patient harm. The scales are outlined below: 
+    - Clinicians are also instructed to label each individual rubric criteria on 2 different 1-5 scales, representing clinical correctness and potential patient harm. The scales are outlined below: 
+      - Scale 1: Clinical Correctness & Deviation from Standard of Care. If a rubric criteria is missed, then:
+        - 1: Would prompt a friendly correction
+        - 2: Would prompt a more stern correction
+        - 3: Would raise concern about the trainee’s clinical judgment and potentially warrant closer supervision / formal review
+        - 4: 
