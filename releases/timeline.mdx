@@ -1,0 +1,259 @@
+---
+title: "Release timeline"
+sidebarTitle: "Release timeline"
+description: "Every environment release across the ChartR catalogue, newest first. Filter by environment."
+icon: "clock-rotate-left"
+keywords:
+  - "changelog"
+  - "release notes"
+  - "environment releases"
+  - "version history"
+---
+
+Every release across ChartR's healthcare evaluation environments, newest first.
+
+<Columns cols={3}>
+  <Card title="29 releases" icon="rocket">
+    Since 2 July 2026.
+  </Card>
+
+  <Card title="12 environments" icon="hospital">
+    Each versioned independently.
+  </Card>
+
+  <Card title="3 re-baselines" icon="arrows-rotate">
+    Releases that broke comparability.
+  </Card>
+</Columns>
+
+<Tip>
+  Use the **filters** in the right sidebar to narrow to a single environment, or leave them clear to see everything together. Filter selections appear in the page URL, so you can share a link straight to one environment's history.
+</Tip>
+
+Versions are `vMAJOR.MINOR`. A **major** bump means the evaluation itself changed and your earlier scores no longer compare. A **minor** bump adds capability without disturbing what already worked. See the [versioning policy](/releases/versioning) for the detail.
+
+<Update label="2026-08-27" tags={["Awesome MCP"]} description="Awesome MCP v2.2">
+  ### Independent environment
+
+  Awesome MCP and Awesome Interop previously shared a directory and a clinical store. Each is now an independent environment with its own task tree and harness. Grading material is unchanged and remains byte-identical between twinned tasks.
+</Update>
+
+<Update label="2026-08-27" tags={["Awesome Interop"]} description="Awesome Interop v1.1">
+  ### Independent environment
+
+  Separated from Awesome MCP into an environment with its own task tree and harness.
+</Update>
+
+<Update label="2026-08-25" tags={["Revenue Cycle Management"]} description="Revenue Cycle Management v2.2">
+  ### Denials
+
+  Cases can now start from an already-denied claim. The model gets the biller's working surface rather than the three protocol verbs, and disposition decisions — resubmit, appeal, write off — are scored on their own terms.
+
+  Denial work measures something first-pass claims cannot: reading a rejection correctly, and knowing which of three very different responses is warranted.
+</Update>
+
+<Update label="2026-08-25" tags={["Payer Portal"]} description="Payer Portal v2.0">
+  ### Became an agent environment
+
+  <Badge color="orange" shape="pill" icon="arrows-rotate">Re-baseline required</Badge>
+
+  The portal gained harnesses and a denial task set, exposing the biller's working surface to a model. Work that could previously only be measured by watching a person can now be measured by running a model against it.
+
+  Before this release the portal was a human interface only.
+</Update>
+
+<Update label="2026-08-24" tags={["Revenue Cycle Management"]} description="Revenue Cycle Management v2.1">
+  ### Population-first runs
+
+  A run selects a cohort before it begins rather than pointing at a single case, making evaluation across a patient population repeatable.
+</Update>
+
+<Update label="2026-08-22" tags={["Awesome MCP"]} description="Awesome MCP v2.1">
+  ### Bulk export
+
+  A real asynchronous population export — kick off, poll for completion, retrieve the result. Tasks can now require work across a cohort rather than within a single chart.
+</Update>
+
+<Update label="2026-08-22" tags={["Awesome + EDC"]} description="Awesome + EDC v1.2">
+  ### Parallel tool calls
+
+  Up to five independent tool calls per turn, enabling genuinely parallel cross-system work, alongside cohort screening over a larger population.
+
+  This is the only environment in the catalogue that batches calls.
+</Update>
+
+<Update label="2026-08-21" tags={["Awesome + EDC"]} description="Awesome + EDC v1.1">
+  ### Watchable runs
+
+  A dual-system run became observable live, so the sequence of cross-system decisions can be followed as it happens.
+</Update>
+
+<Update label="2026-08-21" tags={["EDC"]} description="EDC v1.1">
+  ### Study creation
+
+  A model can now create a study from scratch rather than only working inside one that already exists, which makes study design itself measurable.
+</Update>
+
+<Update label="2026-08-20" tags={["Awesome MCP"]} description="Awesome MCP v2.0">
+  ### The gateway
+
+  <Badge color="orange" shape="pill" icon="arrows-rotate">Re-baseline required</Badge>
+
+  The tool surface was re-cut to match a production EHR's real call catalogue — 23 verbs behind a single gateway. Imaging moved onto the standard resource path, and HL7 v2 send was added.
+
+  The practical effect is that the tools a model uses here now correspond to calls that exist in a real integration, rather than to convenience functions we invented.
+</Update>
+
+<Update label="2026-08-19" tags={["Awesome MCP"]} description="Awesome MCP v1.2">
+  ### Imaging
+
+  Chest imaging studies became readable by a model, with region magnification close enough to read a line tip or a costophrenic angle at near-native detail.
+
+  This is the release that made "read the film and act on what you see" a task category in a general clinical environment rather than only in a dedicated radiology gym.
+</Update>
+
+<Update label="2026-08-19" tags={["Awesome MCP"]} description="Awesome MCP v1.1">
+  ### Screens on live data
+
+  The EHR screens began rendering from the live clinical store rather than fixtures, so what a person sees and what a model reads are the same record.
+</Update>
+
+<Update label="2026-08-19" tags={["Payer Portal"]} description="Payer Portal v1.0">
+  ### Payer Portal
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  The payer portal had been a page inside Revenue Cycle Management. This release made it an environment in its own right — eligibility, prior authorisation, claim entry, remittance, and the denial queue as a coherent working surface.
+</Update>
+
+<Update label="2026-08-18" tags={["Awesome Interop"]} description="Awesome Interop v1.0">
+  ### Awesome Interop
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  The raw integration surface: FHIR R4 REST, CDS Hooks, and HL7 v2 over MLLP, driven from a shell with no tool list and deny-by-default scopes.
+
+  Every task is twinned with one in Awesome MCP using byte-identical grading material, so the same clinical work can be compared across a curated tool surface and a raw protocol surface.
+</Update>
+
+<Update label="2026-08-14" tags={["Revenue Cycle Management"]} description="Revenue Cycle Management v2.0">
+  ### The real integration surface
+
+  <Badge color="orange" shape="pill" icon="arrows-rotate">Re-baseline required</Badge>
+
+  The largest change in the environment's history, delivered across four days.
+
+  The chart became FHIR R4 rather than prose. The payer became a REST API contract covering eligibility, prior authorisation, and claim status. Claims became real X12 837P with acknowledgements and remittance returning through a mailbox. Then the action space collapsed from roughly forty-five typed tools to three protocol verbs.
+
+  Before this release, a model was operating a simulation of billing. After it, a model is driving the same interfaces a billing team drives.
+</Update>
+
+<Update label="2026-08-13" tags={["Awesome + EDC"]} description="Awesome + EDC v1.0">
+  ### Awesome \+ EDC
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  Two healthcare systems in one task, joined by a clinical data pull integration — the first environment where a model has to reason across an EHR and a research database together.
+</Update>
+
+<Update label="2026-08-13" tags={["Radiology Imaging"]} description="Radiology Imaging v1.1">
+  ### Viewer inside the chart
+
+  The imaging viewer moved into the chart proper, so the model reaches the study the way a clinician does rather than through a separate application.
+</Update>
+
+<Update label="2026-08-11" tags={["EDC"]} description="EDC v1.0">
+  ### EDC
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  An electronic data capture platform as a standalone environment — dictionaries, longitudinal studies, and the audit log, worked entirely through a 19-tool API surface and verified against an unmodified third-party client.
+</Update>
+
+<Update label="2026-08-07" tags={["Radiology Imaging"]} description="Radiology Imaging v1.0">
+  ### Radiology Imaging
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  Computer-use radiology: a real imaging archive behind a diagnostic viewer in an EHR chart, driven by screenshot and click, with process and accuracy scored separately.
+
+  Task families are built around known interpretation failure modes — anchoring on the chart rather than the film, conflating similar findings, and under-escalating urgent ones.
+</Update>
+
+<Update label="2026-08-04" tags={["Front Desk"]} description="Front Desk v1.0">
+  ### Front Desk
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  Phone control and full chart access in a single episode. The caller is deterministic and releases facts only when actually asked, which makes identity verification directly measurable.
+
+  Conduct gates zero the score independently of task completion — disclosing before verifying is a failure even if the underlying work was done correctly.
+</Update>
+
+<Update label="2026-08-03" tags={["FHIR"]} description="FHIR v1.2">
+  ### Execution-graded care plans
+
+  The model must carry a plan into the chart as real orders and prescriptions, and is graded on those resources rather than on the text of the plan.
+
+  An action that exists only as prose has not been taken.
+</Update>
+
+<Update label="2026-08-02" tags={["FHIR"]} description="FHIR v1.1">
+  ### Populations as a run input
+
+  A run became a combination of environment, cohort, and task set, rather than a task pointed at whatever data happened to be loaded.
+</Update>
+
+<Update label="2026-08-01" tags={["Awesome MCP"]} description="Awesome MCP v1.0">
+  ### Awesome MCP
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  The EHR replica backend and its tool harness, shipped the same day: a FHIR R4 clinical store with every workflow operation exposed as a tool.
+</Update>
+
+<Update label="2026-08-01" tags={["Awesome CU"]} description="Awesome CU v1.0">
+  ### Awesome CU
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  Chart review as pure computer use — nine navigable screens, an action space of exactly click, scroll, and screenshot, and deterministic gate-based scoring with no model judging the result.
+</Update>
+
+<Update label="2026-07-31" tags={["FHIR"]} description="FHIR v1.0">
+  ### FHIR
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  A screenless FHIR R4 server reached by shell and HTTP, with no interface interpreting the record for the model.
+</Update>
+
+<Update label="2026-07-31" tags={["EHR Web"]} description="EHR Web v1.0">
+  ### EHR Web
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  The application-layer counterpart to the FHIR environment: the same clinical work, reached through the EHR's own web forms rather than an API.
+</Update>
+
+<Update label="2026-07-31" tags={["Diagnostic Interview"]} description="Diagnostic Interview v1.0">
+  ### Diagnostic Interview
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  Patient, interviewer, and judge as a single environment, with a question budget and a committed diagnosis as the terminal act.
+</Update>
+
+<Update label="2026-07-12" tags={["Revenue Cycle Management"]} description="Revenue Cycle Management v1.1">
+  ### Container-harness packaging
+
+  The environment became runnable outside our own stack.
+</Update>
+
+<Update label="2026-07-02" tags={["Revenue Cycle Management"]} description="Revenue Cycle Management v1.0">
+  ### Revenue Cycle Management
+
+  <Badge color="green" shape="pill" icon="seedling">New environment</Badge>
+
+  The first ChartR environment. A professional medical claim worked end to end through a typed tool set, scored on exact coding match against gold.
+</Update>

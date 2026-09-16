@@ -1,0 +1,112 @@
+---
+title: "Awesome MCP"
+sidebarTitle: "Awesome MCP"
+description: "A functioning EHR replica worked through a curated clinical tool surface, including imaging and population export."
+icon: "notes-medical"
+keywords:
+  - "EHR agent"
+  - "MCP tools"
+  - "clinical workflow"
+  - "FHIR"
+  - "medical imaging"
+  - "bulk export"
+---
+
+<Info>
+  **Status** Live · **Version** v2.2 · **Surface** Tool surface
+</Info>
+
+A working EHR replica, reached through a curated set of clinical tools. A model reads charts, documents findings, places orders, prescribes, and communicates — the same operations a clinician performs in a working day, exposed as **23 tools** through a single gateway modelled on a production EHR's call catalogue.
+
+This is the flagship clinical environment. Because the tool surface is curated and documented, it isolates clinical judgement from integration work: a model that fails here is failing at the medicine or the workflow, not at constructing an HTTP request.
+
+## What the model can do
+
+<AccordionGroup>
+  <Accordion title="Read the chart" icon="folder-open">
+    Read and search any resource in the clinical store, and pull a synthesised chart context for a patient.
+  </Accordion>
+
+  <Accordion title="Document" icon="pen-to-square">
+    Write and sign notes, record vitals, document allergies, and add problems and diagnoses.
+  </Accordion>
+
+  <Accordion title="Order and prescribe" icon="prescription">
+    Place, sign, update, and cancel orders. Order, sign, and discontinue medications.
+  </Accordion>
+
+  <Accordion title="Read imaging" icon="x-ray">
+    Pull rendered frames from an imaging study and magnify any region of a film — close enough to read a line tip or a costophrenic angle at near-native detail.
+  </Accordion>
+
+  <Accordion title="Export a population" icon="database">
+    Run a real asynchronous bulk export over a patient group: kick off, poll for completion, retrieve the result.
+  </Accordion>
+
+  <Accordion title="Send HL7 v2" icon="paper-plane">
+    Transmit an HL7 v2 message and read the acknowledgement.
+  </Accordion>
+</AccordionGroup>
+
+One tool call per turn.
+
+## Two capabilities worth calling out
+
+### Imaging
+
+The imaging tool is what makes radiology-style tasks possible in a general clinical environment. A model can pull the films attached to a study and zoom into a specific region, so a task can require it to actually look at the image rather than reason from the report text.
+
+### Bulk export
+
+A real asynchronous population export means a task can require work **across a cohort** rather than within a single chart — finding the patients who meet a criterion, not just answering a question about one.
+
+## Paired environments
+
+<Columns cols={2}>
+  <Card title="Awesome Interop" icon="network-wired" href="/environments/awesome-interop">
+    The same clinical store with no tool list at all. Tasks are twinned so the same work can be compared across a curated surface and a raw one.
+  </Card>
+
+  <Card title="Awesome + EDC" icon="flask" href="/environments/awesome-edc">
+    The same EHR joined to a research database, for work that spans two systems.
+  </Card>
+</Columns>
+
+## Release history
+
+| Version | Date | Summary |
+| --- | --- | --- |
+| **v2.2** | 2026-08-27 | Independent environment |
+| **v2.1** | 2026-08-22 | Bulk export |
+| **v2.0** | 2026-08-20 | The gateway |
+| **v1.2** | 2026-08-19 | Imaging |
+| **v1.1** | 2026-08-19 | Screens on live data |
+| **v1.0** | 2026-08-01 | Initial release |
+
+### v2.2 — Independent environment
+
+Awesome MCP and [Awesome Interop](/environments/awesome-interop) previously shared a directory and a clinical store. Each is now an independent environment with its own task tree and harness. Grading material is unchanged and remains byte-identical between the twinned tasks.
+
+### v2.1 — Bulk export
+
+A real asynchronous population export, so tasks can require cohort-level work.
+
+### v2.0 — The gateway
+
+<Warning>
+  Results from before this release are not comparable with results after it. The tool surface changed.
+</Warning>
+
+The tool surface was re-cut to match a production EHR's real call catalogue — 23 verbs behind a single gateway. Imaging moved onto the standard resource path, and HL7 v2 send was added. The practical effect is that the tools a model uses here now correspond to calls that exist in a real integration, rather than to convenience functions we invented.
+
+### v1.2 — Imaging
+
+Chest imaging studies became readable by a model, with region magnification. This is the release that made "read the film and act on what you see" a task category in this environment rather than only in a dedicated radiology gym.
+
+### v1.1 — Screens on live data
+
+The EHR screens began rendering from the live clinical store rather than fixtures, so what a person sees and what a model reads are the same record.
+
+### v1.0 — Initial release
+
+The EHR replica backend and its tool harness, shipped the same day: a FHIR R4 clinical store with every workflow operation exposed as a tool.

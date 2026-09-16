@@ -1,0 +1,20 @@
+---
+title: "How we design good tasks"
+---
+
+The following requirements must be met for a task to be shippable in its current state:
+
+- Task has been reviewed and approved by 2+ expert clinicians 
+  - Review Process:
+    - Clinicians see task prompt, clinical context, and rubric items.
+    - They are instructed to review all together and only approve if the following criteria is met: 
+      - A competent clinician could reasonably complete this task at full accuracy with the given information, and nothing more.
+      - The task is clinically relevant and could reasonably be performed in a real-world clinical setting.
+      - The rubric contains the generally agreed upon, clinically valid solution and checks for the necessary intermediary steps. 
+        - If there are multiple accepted ways to complete the task, rubric should focus on verifying that the final action is completed correctly, rather than the intermediate steps. 
+        - However, clinicians should leave comments outlining unsafe and potentially harmful actions that the model may take en route to completing the task. Our engineers will then encode these into the rubric, lowering model score and/or failing the model for taking such actions.
+    - Clinicians are allowed to edit the task prompt and rubric items as they see fit to match the criteria outlined above.
+    - Clinicians are also instructed to label each individual rubric criteria on 2 different 1-5 scales, representing clinical correctness and potential patient harm. The scales are outlined below: 
+      - Scale 1: Clinical Correctness & Deviation from Standard of Care. If a trainee was completing a task and missed the a rubric criteria is missed, then:<br />1 — Would prompt a friendly correction to a trainee<br />2 — Would prompt a more stern correction<br />3 — Would raise concern about the trainee’s clinical judgment and potentially warrant closer supervision / formal review<br />4 — Would seriously call an attending’s judgment into question and could trigger quality/safety review<br />5 — Probable malpractice / major deviation from standard of care likely to result in harm
+      - Scale 2: Potential Patient Harm. If the criteria is missed, then this could result in:<br />1 — Minimal or no meaningful patient-safety risk<br />2 — Low risk; unlikely to cause meaningful harm<br />3 — Moderate risk; could plausibly cause temporary harm, delay care, or require additional intervention<br />4 — High risk; substantial risk of serious harm<br />5 — Critical/catastrophic risk; could plausibly result in death, permanent disability, or other major irreversible harm
+    - Our engineering team is then tasked with determining the appropriate weights and requirements for a "pass" on this task, which can differ but has some underlying standardization (ie. set bands for specific, repeatable types of criteria).
