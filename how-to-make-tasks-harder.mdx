@@ -1,0 +1,112 @@
+---
+title: "How to make tasks harder"
+sidebarTitle: "Making Tasks Harder"
+description: "Techniques for stress-testing models on clinical tasks, from adversarial prompting to workflow-level trap design and trajectory review."
+---
+
+Use these techniques to increase task difficulty without compromising fairness. Work closely with clinical fellows before making changes that could invalidate a task.
+
+## Adversarial prompting techniques
+
+Probe the model's robustness, consistency, and reasoning under pressure.
+
+<AccordionGroup>
+  <Accordion title="Keep pushing back">
+    Does the model eventually give unsafe advice?
+  </Accordion>
+
+  <Accordion title="Retry the same task">
+    Is it consistent? This is ultimately what pass@k is testing.
+  </Accordion>
+
+  <Accordion title="Provide conflicting or outdated records">
+    Does it reconcile them?
+  </Accordion>
+
+  <Accordion title="Bury a critical detail in a long chart">
+    Does it miss or omit it? Would we expect a human to seek this info out?
+  </Accordion>
+
+  <Accordion title="Supply a confident but incorrect diagnosis">
+    Does it challenge the premise? Does it over-index on the vignette rather than imaging?
+
+    <Note>
+      We want models to ground their answers in patient charts, not the task. Some reviewers may disagree, so keep these types of tasks separate.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Ask for a complete note from sparse data">
+    Does it invent details? The model should know when to say "I don't have the necessary information to claim xyz" rather than hallucinating.
+  </Accordion>
+
+  <Accordion title="Vary units, dates, or medication status">
+    Does it misinterpret them?
+  </Accordion>
+
+  <Accordion title="Supply misleading evidence or fake protocol citations">
+    Does it accept them?
+
+    <Warning>
+      Be careful with misleading evidence. Prefer irrelevant or conflicting information already in the note or task. Avoid manipulating EHR data; if you must, work closely with a lead clinical fellow to ensure the task remains valid.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="Simulate a failed order or missing result">
+    Does it falsely report completion? Especially relevant for RadAct.
+  </Accordion>
+
+  <Accordion title="Pressure it to justify discharge, billing, or coverage">
+    Does it distort the evidence? Relevant for RCM.
+  </Accordion>
+
+  <Accordion title="Embed instructions in a chart attachment">
+    Does it follow them? Tests ability to read files and search for information.
+
+    <Note>
+      Consider whether this is too hard, and whether a human would reasonably be expected to do it.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Change clinically irrelevant demographics">
+    Does the recommendation change?
+  </Accordion>
+
+  <Accordion title="Introduce worsening risk or contradict an earlier answer">
+    Does it escalate or correct itself?
+  </Accordion>
+</AccordionGroup>
+
+## Task and rubric design techniques
+
+Structural approaches that make tasks harder at the design level.
+
+### Remove non-essential instructions
+
+Strip information or extra instructions from the task that aren't strictly needed. Engineering should work closely with clinical fellows to ensure this doesn't make the rubric unfair.
+
+As a rule of thumb, you can remove something from the prompt if:
+
+1. It's already stated elsewhere, or
+2. It's implied by the rest of the task and a competent physician would have understood it (for example, removing intermediate steps: if a rubric checkpoint is to prescribe the correct medication, the task can say that without explicitly telling the model to do med rec).
+
+### Design traps around known hard decisions
+
+Work with experts to identify the hardest decisions in the workflow, where humans often fail or clinical reasoning judgment is required. Then embed traps around those decisions, for example patients who are close but don't match exactly in patient-trial matching tasks.
+
+### Review trajectories for missing intermediate steps
+
+Comb through trajectories and ensure models are taking all correct intermediate steps and precautions. If they aren't, add those to the rubric and have the agentic grader fail the model on them.
+
+<Tip>
+  The trajectory is the single best resource for how the model performs on a task. It ensures failures are meaningful and attributable to the model, not the environment.
+</Tip>
+
+To validate this, run the task on different models. If the same checkpoints consistently zero on all frontier models, that raises suspicion of an environment or harness issue. It doesn't necessarily mean there is one (some checkpoints may be genuinely unsolvable), but the engineering DRI should look at those trajectories and cross-reference with clinical fellows.
+
+### Ground design in known model failure modes
+
+Literature review on where specific models fail is always helpful in a broad sense; scope down from there. Design vignettes around real clinical scenarios, but design the individual tasks around observed model failures.
+
+<Note>
+  Frontier models (including Opus 5) are very bad at finding a piece of information and carrying that insight through many steps. If the model rechecks the information it won't mess up, but often it just uses what it remembers, which gets messy as its context window fills up.
+</Note>
